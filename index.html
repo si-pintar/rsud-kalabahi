@@ -1,0 +1,2036 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SI-PINTAR RSUD KALABAHI</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f3f4fc',
+                            100: '#e4e6f4',
+                            500: '#4b5694', // Biru Indigo Premium
+                            600: '#3a4374',
+                            700: '#2d345c',
+                            900: '#111844', // Biru Navy Tua Alor
+                        },
+                        accent: {
+                            400: '#fbbf24', // Alor Gold
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        .animate-fade-in {
+            animation: fadeIn 0.25s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Custom scrollbar layout */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- TOP EMERGENCY BAR -->
+    <header class="bg-[#111844] text-white text-[11px] font-semibold py-2 px-4 shadow-inner relative z-50">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <span class="flex items-center text-red-400 font-extrabold animate-pulse">
+                    <i data-lucide="activity" class="w-3.5 h-3.5 mr-1"></i> IGD: 24 Jam Non-Stop
+                </span>
+            </div>
+            <div class="flex items-center gap-2 text-slate-200">
+                <i data-lucide="clock" class="w-3.5 h-3.5 text-brand-100 animate-spin" style="animation-duration: 8s;"></i>
+                <span>Sistem Informasi Pelayanan & Edukasi Terintegrasi</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="bg-white/95 backdrop-blur-md sticky top-0 z-40 border-b border-slate-100 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            
+            <!-- Logo Section & Pemkab Alor -->
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="navigateTo('beranda')">
+                <!-- Lambang Pemkab Alor Gambar Terintegrasi -->
+                <img src="LOGO_KAB_ALOR_180801.png" class="h-11 w-auto transition-transform group-hover:scale-105 duration-200" alt="Logo Kabupaten Alor" onerror="this.onerror=null; this.src='https://placehold.co/100x100/111844/ffffff?text=Alor';">
+                <div class="border-l-2 border-slate-200 pl-3">
+                    <h1 class="text-lg font-extrabold leading-none tracking-tight text-brand-900 group-hover:text-brand-500 transition-colors">RSUD KALABAHI</h1>
+                    <p class="text-[9px] text-brand-500 font-bold uppercase tracking-widest mt-0.5">Kabupaten Alor - NTT</p>
+                </div>
+            </div>
+
+            <!-- Desktop Nav Menu -->
+            <div class="hidden lg:flex items-center space-x-1">
+                <button onclick="navigateTo('beranda')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition hover:bg-slate-100 text-slate-700">BERANDA</button>
+                
+                <!-- Dropdown Profil -->
+                <div class="relative dropdown-container">
+                    <button onclick="toggleDropdown(event, 'dropdown-profil')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition hover:bg-slate-100 text-slate-700 flex items-center gap-1 focus:outline-none">
+                        PROFIL RSUD <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-250 chevron-icon"></i>
+                    </button>
+                    <div id="dropdown-profil" class="dropdown-menu absolute top-full left-0 mt-2 w-64 bg-white border border-slate-100 rounded-xl shadow-xl py-2 hidden animate-fade-in z-50">
+                        <a href="#sejarah-section" onclick="navigateToSub('profil', 'sejarah-section')" class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500">Sejarah RSUD Kalabahi</a>
+                        <a href="#struktur-section" onclick="navigateToSub('profil', 'struktur-section')" class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500">Struktur Organisasi RSUD</a>
+                        <a href="#tupoksi-section" onclick="navigateToSub('profil', 'tupoksi-section')" class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500">Tugas Pokok & Fungsi</a>
+                        <a href="#visimisi-section" onclick="navigateToSub('profil', 'visimisi-section')" class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500">Visi & Misi RSUD Kalabahi</a>
+                        <a href="#moto-section" onclick="navigateToSub('profil', 'moto-section')" class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500">Moto RSUD Kalabahi</a>
+                        <a href="#nilai-section" onclick="navigateToSub('profil', 'nilai-section')" class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500">Nilai-Nilai RSUD Kalabahi</a>
+                    </div>
+                </div>
+
+                <!-- Dropdown Poliklinik -->
+                <div class="relative dropdown-container">
+                    <button onclick="toggleDropdown(event, 'dropdown-rawatjalan')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition hover:bg-slate-100 text-slate-700 flex items-center gap-1 focus:outline-none">
+                        RAWAT JALAN <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-250 chevron-icon"></i>
+                    </button>
+                    <div id="dropdown-rawatjalan" class="dropdown-menu absolute top-full left-0 mt-2 w-64 bg-white border border-slate-100 rounded-xl shadow-xl py-2 hidden z-50">
+                        <a href="https://sites.google.com/view/jadwal-dokter-rsud-kalabahi/halaman-muka" target="_blank" class="flex items-center justify-between px-4 py-2 text-xs font-semibold text-amber-600 hover:bg-amber-50 hover:text-amber-700">
+                            <span>Jadwal Dokter Poliklinik</span>
+                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <a href="#alur-jalan-section" onclick="navigateToSub('rawatjalan', 'alur-jalan-section')" class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500">Alur Pendaftaran Poliklinik</a>
+                        <a href="#gambar-poli-section" onclick="navigateToSub('rawatjalan', 'gambar-poli-section')" class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500">Gambar Poliklinik</a>
+                    </div>
+                </div>
+
+                <!-- Dropdown Rawat Inap -->
+                <div class="relative dropdown-container">
+                    <button onclick="toggleDropdown(event, 'dropdown-rawatinap')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition hover:bg-slate-100 text-slate-700 flex items-center gap-1 focus:outline-none">
+                        RAWAT INAP <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-250 chevron-icon"></i>
+                    </button>
+                    <div id="dropdown-rawatinap" class="dropdown-menu absolute top-full left-0 mt-2 w-72 bg-white border border-slate-100 rounded-xl shadow-xl py-2 hidden z-50">
+                        <a href="#ruang-section" onclick="navigateToSub('rawatinap', 'ruang-section')" class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500">Ruang Perawatan RSUD</a>
+                        <a href="#jumlah-bed-section" onclick="navigateToSub('rawatinap', 'jumlah-bed-section')" class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500">Jumlah Tempat Tidur di Ruang Perawatan</a>
+                        <a href="#gambar-ruang-section" onclick="navigateToSub('rawatinap', 'gambar-ruang-section')" class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500">Gambar Ruang Perawatan</a>
+                    </div>
+                </div>
+
+                <!-- Dropdown IGD -->
+                <div class="relative dropdown-container">
+                    <button onclick="toggleDropdown(event, 'dropdown-igd')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition hover:bg-slate-100 text-slate-700 flex items-center gap-1 focus:outline-none">
+                        IGD <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-250 chevron-icon"></i>
+                    </button>
+                    <div id="dropdown-igd" class="dropdown-menu absolute top-full left-0 mt-2 w-64 bg-white border border-slate-100 rounded-xl shadow-xl py-2 hidden z-50">
+                        <a href="#alur-igd-section" onclick="navigateToSub('igd', 'alur-igd-section')" class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500">Alur Pelayanan</a>
+                        <a href="#kapasitas-igd-section" onclick="navigateToSub('igd', 'kapasitas-igd-section')" class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500">Kapasitas Tempat Tidur IGD</a>
+                    </div>
+                </div>
+                
+                <!-- Menu PROMOSI KESEHATAN -->
+                <a href="https://sites.google.com/view/promosi-kesehatan-rsudkalabahi/halaman-muka" target="_blank" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition hover:bg-slate-100 text-slate-700 flex items-center gap-1">
+                    PROMOSI KESEHATAN
+                </a>
+
+                <!-- Menu KEGIATAN KAMI (Di antara PROMOSI KESEHATAN dan FASILITAS) -->
+                <a href="https://sites.google.com/view/kegiatan-rsud-kalabahi/halaman-muka" target="_blank" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition hover:bg-slate-100 text-slate-700 flex items-center gap-1">
+                    KEGIATAN KAMI
+                </a>
+
+                <!-- Dropdown Fasilitas -->
+                <div class="relative dropdown-container">
+                    <button onclick="toggleDropdown(event, 'dropdown-fasilitas')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition hover:bg-slate-100 text-slate-700 flex items-center gap-1 focus:outline-none">
+                        FASILITAS <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-250 chevron-icon"></i>
+                    </button>
+                    <div id="dropdown-fasilitas" class="dropdown-menu absolute top-full left-0 mt-2 w-60 bg-white border border-slate-100 rounded-xl shadow-xl py-2 hidden z-50">
+                        <a href="#instalasi-section" onclick="navigateToSub('fasilitas', 'instalasi-section')" class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500">Instalasi Pelayanan</a>
+                        <a href="#unit-section" onclick="navigateToSub('fasilitas', 'unit-section')" class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500">Unit Pendukung</a>
+                    </div>
+                </div>
+                
+                <!-- Dropdown Denah -->
+                <div class="relative dropdown-container">
+                    <button onclick="toggleDropdown(event, 'dropdown-denah')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition hover:bg-slate-100 text-slate-700 flex items-center gap-1 focus:outline-none">
+                        DENAH RSUD <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-250 chevron-icon"></i>
+                    </button>
+                    <div id="dropdown-denah" class="dropdown-menu absolute top-full left-0 mt-2 w-60 bg-white border border-slate-100 rounded-xl shadow-xl py-2 hidden z-50">
+                        <a href="#denah-rsud-kalabahi-section" onclick="navigateToSub('denah', 'denah-rsud-kalabahi-section')" class="block px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500">Denah RSUD Kalabahi</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-toggle" class="lg:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg focus:outline-none">
+                <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Menu Panel -->
+        <div id="mobile-nav" class="hidden lg:hidden bg-white border-t border-slate-100 shadow-lg px-4 py-4 space-y-2 font-semibold text-slate-700 animate-fade-in max-h-[80vh] overflow-y-auto">
+            <button onclick="navigateTo('beranda'); toggleMobileMenu()" class="block w-full text-left py-2.5 px-3 hover:bg-slate-50 rounded-xl text-brand-900 font-extrabold text-sm transition">BERANDA</button>
+            <hr class="border-slate-100 my-1">
+            
+            <!-- Mobile Kategori: Profil RSUD -->
+            <div class="space-y-1">
+                <button onclick="toggleMobileSubmenu('mob-sub-profil')" class="w-full flex justify-between items-center py-2.5 px-3 hover:bg-slate-50 rounded-xl text-slate-700 text-sm font-bold transition">
+                    <span>PROFIL RSUD</span>
+                    <i data-lucide="chevron-down" id="mob-chevron-profil" class="w-4 h-4 transition-transform duration-200"></i>
+                </button>
+                <div id="mob-sub-profil" class="hidden pl-4 space-y-1 border-l-2 border-slate-100 ml-3">
+                    <a href="#sejarah-section" onclick="navigateToSub('profil', 'sejarah-section'); toggleMobileMenu()" class="block py-2 px-3 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500 rounded-lg">Sejarah RSUD Kalabahi</a>
+                    <a href="#struktur-section" onclick="navigateToSub('profil', 'struktur-section'); toggleMobileMenu()" class="block py-2 px-3 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500 rounded-lg">Struktur Organisasi RSUD</a>
+                    <a href="#tupoksi-section" onclick="navigateToSub('profil', 'tupoksi-section'); toggleMobileMenu()" class="block py-2 px-3 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500 rounded-lg">Tugas Pokok & Fungsi</a>
+                    <a href="#visimisi-section" onclick="navigateToSub('profil', 'visimisi-section'); toggleMobileMenu()" class="block py-2 px-3 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500 rounded-lg">Visi & Misi RSUD Kalabahi</a>
+                    <a href="#moto-section" onclick="navigateToSub('profil', 'moto-section'); toggleMobileMenu()" class="block py-2 px-3 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500 rounded-lg">Moto RSUD Kalabahi</a>
+                    <a href="#nilai-section" onclick="navigateToSub('profil', 'nilai-section'); toggleMobileMenu()" class="block py-2 px-3 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500 rounded-lg">Nilai-Nilai RSUD Kalabahi</a>
+                </div>
+            </div>
+
+            <!-- Mobile Kategori: Rawat Jalan -->
+            <div class="space-y-1">
+                <button onclick="toggleMobileSubmenu('mob-sub-rawatjalan')" class="w-full flex justify-between items-center py-2.5 px-3 hover:bg-slate-50 rounded-xl text-slate-700 text-sm font-bold transition">
+                    <span>RAWAT JALAN</span>
+                    <i data-lucide="chevron-down" id="mob-chevron-rawatjalan" class="w-4 h-4 transition-transform duration-200"></i>
+                </button>
+                <div id="mob-sub-rawatjalan" class="hidden pl-4 space-y-1 border-l-2 border-slate-100 ml-3">
+                    <a href="https://sites.google.com/view/jadwal-dokter-rsud-kalabahi/halaman-muka" target="_blank" onclick="toggleMobileMenu()" class="flex items-center justify-between py-2 px-3 text-xs font-semibold text-amber-600 hover:bg-amber-50 hover:text-amber-700 rounded-lg">
+                        <span>Jadwal Dokter Poliklinik</span>
+                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    </a>
+                    <a href="#alur-jalan-section" onclick="navigateToSub('rawatjalan', 'alur-jalan-section'); toggleMobileMenu()" class="block py-2 px-3 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500 rounded-lg">Alur Pendaftaran Poliklinik</a>
+                    <a href="#gambar-poli-section" onclick="navigateToSub('rawatjalan', 'gambar-poli-section')" class="block py-2 px-3 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500 rounded-lg">Gambar Poliklinik</a>
+                </div>
+            </div>
+
+            <!-- Mobile Kategori: Rawat Inap -->
+            <div class="space-y-1">
+                <button onclick="toggleMobileSubmenu('mob-sub-rawatinap')" class="w-full flex justify-between items-center py-2.5 px-3 hover:bg-slate-50 rounded-xl text-slate-700 text-sm font-bold transition">
+                    <span>RAWAT INAP</span>
+                    <i data-lucide="chevron-down" id="mob-chevron-rawatinap" class="w-4 h-4 transition-transform duration-200"></i>
+                </button>
+                <div id="mob-sub-rawatinap" class="hidden pl-4 space-y-1 border-l-2 border-slate-100 ml-3">
+                    <a href="#ruang-section" onclick="navigateToSub('rawatinap', 'ruang-section'); toggleMobileMenu()" class="block py-2 px-3 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500 rounded-lg">Ruang Perawatan RSUD</a>
+                    <a href="#jumlah-bed-section" onclick="navigateToSub('rawatinap', 'jumlah-bed-section')" class="block py-2 px-3 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500 rounded-lg">Jumlah Tempat Tidur di Ruang Perawatan</a>
+                    <a href="#gambar-ruang-section" onclick="navigateToSub('rawatinap', 'gambar-ruang-section')" class="block py-2 px-3 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500 rounded-lg">Gambar Ruang Perawatan</a>
+                </div>
+            </div>
+
+            <!-- Mobile Kategori: IGD -->
+            <div class="space-y-1">
+                <button onclick="toggleMobileSubmenu('mob-sub-igd')" class="w-full flex justify-between items-center py-2.5 px-3 hover:bg-slate-50 rounded-xl text-slate-700 text-sm font-bold transition">
+                    <span>IGD</span>
+                    <i data-lucide="chevron-down" id="mob-chevron-igd" class="w-4 h-4 transition-transform duration-200"></i>
+                </button>
+                <div id="mob-sub-igd" class="hidden pl-4 space-y-1 border-l-2 border-slate-100 ml-3">
+                    <a href="#alur-igd-section" onclick="navigateToSub('igd', 'alur-igd-section')" class="block py-2 px-3 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500 rounded-lg">Alur Pelayanan</a>
+                    <a href="#kapasitas-igd-section" onclick="navigateToSub('igd', 'kapasitas-igd-section')" class="block py-2 px-3 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500 rounded-lg">Kapasitas Tempat Tidur IGD</a>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu: PROMOSI KESEHATAN -->
+            <a href="https://sites.google.com/view/promosi-kesehatan-rsudkalabahi/halaman-muka" target="_blank" onclick="toggleMobileMenu()" class="block w-full text-left py-2.5 px-3 hover:bg-slate-50 rounded-xl text-slate-700 text-sm font-bold transition">
+                PROMOSI KESEHATAN
+            </a>
+
+            <!-- Mobile Menu: KEGIATAN KAMI (Di antara PROMOSI KESEHATAN dan FASILITAS) -->
+            <a href="https://sites.google.com/view/kegiatan-rsud-kalabahi/halaman-muka" target="_blank" onclick="toggleMobileMenu()" class="block w-full text-left py-2.5 px-3 hover:bg-slate-50 rounded-xl text-slate-700 text-sm font-bold transition">
+                KEGIATAN KAMI
+            </a>
+
+            <!-- Mobile Kategori: Fasilitas -->
+            <div class="space-y-1">
+                <button onclick="toggleMobileSubmenu('mob-sub-fasilitas')" class="w-full flex justify-between items-center py-2.5 px-3 hover:bg-slate-50 rounded-xl text-slate-700 text-sm font-bold transition">
+                    <span>FASILITAS</span>
+                    <i data-lucide="chevron-down" id="mob-chevron-fasilitas" class="w-4 h-4 transition-transform duration-200"></i>
+                </button>
+                <div id="mob-sub-fasilitas" class="hidden pl-4 space-y-1 border-l-2 border-slate-100 ml-3">
+                    <a href="#instalasi-section" onclick="navigateToSub('fasilitas', 'instalasi-section'); toggleMobileMenu()" class="block py-2 px-3 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500 rounded-lg">Instalasi Pelayanan</a>
+                    <a href="#unit-section" onclick="navigateToSub('fasilitas', 'unit-section')" class="block py-2 px-3 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500 rounded-lg">Unit Pendukung</a>
+                </div>
+            </div>
+            
+            <!-- Mobile Kategori: Denah RSUD -->
+            <div class="space-y-1">
+                <button onclick="toggleMobileSubmenu('mob-sub-denah')" class="w-full flex justify-between items-center py-2.5 px-3 hover:bg-slate-50 rounded-xl text-slate-700 text-sm font-bold transition">
+                    <span>DENAH RSUD</span>
+                    <i data-lucide="chevron-down" id="mob-chevron-denah" class="w-4 h-4 transition-transform duration-200"></i>
+                </button>
+                <div id="mob-sub-denah" class="hidden pl-4 space-y-1 border-l-2 border-slate-100 ml-3">
+                    <a href="#denah-rsud-kalabahi-section" onclick="navigateToSub('denah', 'denah-rsud-kalabahi-section')" class="block py-2 px-3 text-xs font-semibold text-slate-600 hover:bg-brand-50 hover:text-brand-500 rounded-lg">Denah RSUD Kalabahi</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ALERTS/NOTIFICATIONS BANNER -->
+    <div id="toast-container" class="fixed top-24 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- IMAGE LIGHTBOX MODAL FOR FULL VIEW -->
+    <div id="image-lightbox" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-[100] hidden flex items-center justify-center p-4 transition-all duration-300 opacity-0 cursor-zoom-out" onclick="closeLightbox()">
+        <button class="absolute top-6 right-6 text-white hover:text-slate-300 p-2 rounded-full bg-white/10 hover:bg-white/20 transition duration-250 z-50 cursor-pointer" onclick="event.stopPropagation(); closeLightbox();">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="Full view image" class="max-w-full max-h-[95vh] object-contain rounded-xl shadow-2xl transition-all duration-300 scale-95 cursor-default" onclick="event.stopPropagation();">
+    </div>
+
+    <!-- MAIN APP CONTENT PANELS -->
+    <main class="flex-grow">
+
+        <!-- ================= BERANDA SECTION ================= -->
+        <section id="sec-beranda" class="tab-panel">
+            <!-- HERO SECTION (Midnight Blue & Indigo Gradient) -->
+            <div class="relative bg-gradient-to-br from-[#111844] to-[#4B5694] py-20 px-4 overflow-hidden shadow-lg">
+                <div class="absolute inset-0 bg-grid-pattern opacity-10"></div>
+                <div class="absolute -right-16 -top-16 w-80 h-80 bg-brand-500 rounded-full blur-3xl opacity-20"></div>
+                
+                <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
+                    <div class="flex-1 text-white text-center md:text-left">
+                        <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-4 py-2 rounded-full text-accent-400 text-xs font-bold mb-6 border border-white/10 uppercase tracking-widest shadow-sm">
+                            <i data-lucide="sparkles" class="w-4 h-4 animate-spin" style="animation-duration: 3s"></i> Platform Informasi Terpadu Alor
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight mb-4">
+                            SI-PINTAR
+                        </h2>
+                        <p class="text-base md:text-lg text-slate-200 font-semibold uppercase tracking-wider max-w-2xl leading-relaxed mb-6">
+                            Sistem Informasi Pelayanan dan Edukasi Terintegrasi RSUD Kalabahi
+                        </p>
+
+                        <!-- Tombol PROMOSI KESEHATAN, Jadwal Dokter Poliklinik, dan Seputar Kegiatan Kami -->
+                        <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                            <!-- Tombol PROMOSI KESEHATAN Berwarna Putih -->
+                            <a href="https://sites.google.com/view/promosi-kesehatan-rsudkalabahi/halaman-muka" target="_blank" class="inline-flex items-center gap-3 bg-white hover:bg-slate-100 text-brand-900 font-extrabold px-6 py-3.5 rounded-2xl text-sm md:text-base shadow-xl transform transition duration-150 hover:scale-[1.03] active:scale-95 border border-white/30">
+                                <span>PROMOSI KESEHATAN</span>
+                                <div class="bg-brand-50 p-1.5 rounded-xl flex items-center justify-center">
+                                    <i data-lucide="megaphone" class="w-5 h-5 text-brand-900"></i>
+                                </div>
+                            </a>
+
+                            <!-- Tombol Jadwal Dokter Poliklinik Berwarna Jingga -->
+                            <a href="https://sites.google.com/view/jadwal-dokter-rsud-kalabahi/halaman-muka" target="_blank" class="inline-flex items-center gap-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold px-6 py-3.5 rounded-2xl text-sm md:text-base shadow-xl transform transition duration-150 hover:scale-[1.03] active:scale-95 border border-amber-400/40">
+                                <span>Jadwal Dokter Poliklinik</span>
+                                <div class="bg-amber-600/30 p-1.5 rounded-xl flex items-center justify-center">
+                                    <i data-lucide="calendar" class="w-5 h-5 text-slate-950"></i>
+                                </div>
+                            </a>
+
+                            <!-- Tombol Seputar Kegiatan Kami Berwarna Putih (Di sebelah kanan Jadwal Dokter Poliklinik) -->
+                            <a href="https://sites.google.com/view/kegiatan-rsud-kalabahi/halaman-muka" target="_blank" class="inline-flex items-center gap-3 bg-white hover:bg-slate-100 text-brand-900 font-extrabold px-6 py-3.5 rounded-2xl text-sm md:text-base shadow-xl transform transition duration-150 hover:scale-[1.03] active:scale-95 border border-white/30">
+                                <span>Seputar Kegiatan Kami</span>
+                                <div class="bg-brand-50 p-1.5 rounded-xl flex items-center justify-center">
+                                    <i data-lucide="newspaper" class="w-5 h-5 text-brand-900"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Logo SI-PINTAR Terintegrasi -->
+                    <div class="flex-shrink-0 flex items-center justify-center">
+                        <div class="relative group bg-white/10 p-6 rounded-[2rem] border border-white/20 backdrop-blur-md shadow-2xl">
+                            <img src="LOGO_SI-PINTAR_180801.png" class="w-72 md:w-80 h-auto transition-transform group-hover:scale-105 duration-300" alt="Logo SI-PINTAR" onerror="this.onerror=null; this.src='https://placehold.co/300x300/111844/ffffff?text=SI-PINTAR';">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTENT AREA / MOTTO & NILAI -->
+            <div class="max-w-7xl mx-auto px-4 py-16 space-y-16">
+                
+                <!-- Motto & Nilai Section -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                    <!-- Motto -->
+                    <div class="lg:col-span-5 bg-gradient-to-br from-brand-50 to-indigo-50 border border-brand-100 rounded-3xl p-8 flex flex-col justify-between shadow-sm relative overflow-hidden group">
+                        <div class="absolute -right-8 -bottom-8 w-40 h-40 text-brand-100/50">
+                            <i data-lucide="award" class="w-full h-full"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <span class="text-xs font-bold uppercase text-brand-600 tracking-widest block mb-2">Komitmen Utama</span>
+                            <h4 class="text-3xl font-extrabold text-brand-900 mb-6 flex items-center gap-2">
+                                <i data-lucide="award" class="w-8 h-8 text-accent-500"></i> MOTO RSUD
+                            </h4>
+                            <p class="text-2xl font-black text-brand-900 italic leading-relaxed pl-4 border-l-4 border-accent-500">
+                                "Pelayanan bermutu adalah komitmen kami."
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Nilai "ALOR" -->
+                    <div class="lg:col-span-7 bg-white border border-slate-100 rounded-3xl p-8 shadow-md">
+                        <h4 class="text-2xl font-extrabold text-slate-900 mb-6 flex items-center gap-2">
+                            <span class="bg-brand-100 p-2 rounded-xl text-brand-500"><i data-lucide="shield-check" class="w-6 h-6"></i></span> Nilai Budaya Kerja: "ALOR"
+                        </h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-brand-200 transition duration-200">
+                                <span class="text-3xl font-extrabold text-brand-500 block mb-1">A</span>
+                                <h5 class="text-base font-bold text-slate-800 mb-1">Aman</h5>
+                                <p class="text-xs text-slate-500 leading-relaxed">Mengutamakan keamanan, kenyamanan dan keselamatan pasien (patient safety).</p>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-brand-200 transition duration-200">
+                                <span class="text-3xl font-extrabold text-brand-500 block mb-1">L</span>
+                                <h5 class="text-base font-bold text-slate-800 mb-1">Luhur</h5>
+                                <p class="text-xs text-slate-500 leading-relaxed">Pelayanan didasari oleh perilaku moral yang baik berdasarkan etika dan kode etik profesi.</p>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-brand-200 transition duration-200">
+                                <span class="text-3xl font-extrabold text-brand-500 block mb-1">O</span>
+                                <h5 class="text-base font-bold text-slate-800 mb-1">Orientasi pada Mutu</h5>
+                                <p class="text-xs text-slate-500 leading-relaxed">Pelayanan yang berfokus pada kepuasan pasien.</p>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:border-brand-200 transition duration-200">
+                                <span class="text-3xl font-extrabold text-brand-500 block mb-1">R</span>
+                                <h5 class="text-base font-bold text-slate-800 mb-1">Ramah</h5>
+                                <p class="text-xs text-slate-500 leading-relaxed">Pelayanan dengan senyum yang tulus, cepat tanggap dan bersikap peduli terhadap keluhan pasien.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FEEDBACK & KOTAK SARAN MASKOT SECTION -->
+                <div class="bg-slate-100 border border-slate-200 rounded-[2.5rem] p-8 md:p-12 shadow-inner">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-8 space-y-6 text-center lg:text-left">
+                            <div class="inline-flex items-center gap-1.5 bg-brand-100 text-brand-700 px-4 py-1.5 rounded-full text-xs font-bold">
+                                <i data-lucide="mail" class="w-3.5 h-3.5"></i> Hubungan Masyarakat & Humas
+                            </div>
+                            <h4 class="text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">
+                                Layanan Pengaduan, Kotak Saran & Masukan
+                            </h4>
+                            <p class="text-slate-600 text-sm md:text-base leading-relaxed max-w-2xl">
+                                Sampaikan saran atau masukan berharga Anda untuk evaluasi kualitas pelayanan di RSUD Kalabahi.
+                            </p>
+                            <div class="pt-2">
+                                <a href="https://forms.gle/BRqQmRtRebZbVfq57" target="_blank" class="inline-flex items-center gap-2.5 bg-brand-500 hover:bg-brand-600 text-white font-extrabold px-8 py-4 rounded-xl shadow-lg transform transition duration-150 hover:scale-[1.03] active:scale-95 text-sm">
+                                    <i data-lucide="send" class="w-5 h-5"></i> Kirim Saran & Masukan <i data-lucide="external-link" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Maskot Kotak Saran Gambar Terintegrasi -->
+                        <div class="lg:col-span-4 flex justify-center">
+                            <div class="relative group">
+                                <div class="absolute inset-0 bg-brand-300 rounded-full blur-2xl opacity-25 group-hover:scale-110 transition duration-300"></div>
+                                <img 
+                                    src="KARAKTER_KOTAK_SARAN_180801.png" 
+                                    class="h-64 md:h-72 w-auto object-contain relative z-10 transition duration-300 group-hover:translate-y-[-6px]" 
+                                    alt="Karakter Kotak Saran" 
+                                    onerror="this.onerror=null; this.src='https://placehold.co/300x300/111844/ffffff?text=Kotak+Saran';"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= PROFIL SECTION ================= -->
+        <section id="sec-profil" class="tab-panel hidden">
+            <!-- HERO -->
+            <div class="bg-gradient-to-r from-[#111844] to-[#4B5694] py-16 px-4 text-white text-center">
+                <h2 class="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight uppercase">PROFIL RSUD KALABAHI</h2>
+                <div class="w-24 h-1.5 bg-accent-400 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="max-w-5xl mx-auto px-4 py-16 space-y-16">
+                <!-- Sejarah -->
+                <div id="sejarah-section" class="scroll-mt-24 p-8 bg-white border border-slate-100 rounded-3xl shadow-md space-y-6 transition duration-300">
+                    <h3 class="text-2xl font-extrabold text-brand-900 flex items-center gap-2">
+                        <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="history" class="w-6 h-6"></i></span> Sejarah RSUD Kalabahi
+                    </h3>
+                    <p class="text-slate-600 text-sm leading-relaxed text-justify">
+                        Berdirinya Rumah Sakit Daerah Kalabahi berawal dari upaya Pemerintah Kolonial Belanda pada Tahun 1928 untuk memberikan pelayanan kesehatan kepada masyarakat di Pulau Alor. Tempat pelayanan kesehatan pada awalnya menempati lokasi perumahan Pendeta. Pelayanan kesehatan dikelola oleh Zuster M.A. Walfasal Belanda, pada saat itu Rumah Sakit diberi nama Rumah Sakit Bersalin yang khusus melayani ibu hamil dan balita. Namun dengan banyaknya pasien dengan jenis penyakit lain yang ditangani pada saat itu, maka Rumah Sakit Bersalin tersebut kemudian diberi nama Rumah Sakit Landscap Zeicam, dengan pelayanan rawat jalan, rawat inap, serta ruang perawatan tubercolosis, namun ruang perawatan tubercolosis tidak dipakai karena tidak memenuhi syarat.
+                    </p>
+                    <p class="text-slate-600 text-sm leading-relaxed text-justify">
+                        Jabatan Zuster M.A.Walf diganti oleh dr. D. Young asal Jerman pada Tahun 1953, kemudian pada Tahun 1955 dr. H. Clevenhausen berkebangsaan Belanda memimpin Rumah Sakit yang telah diambil alih oleh Pemerintah Swap raja, menjadi Rumah Sakit Umum Daerah Kalabahi. Pada tahun 1960 terjadi kekosongan jabatan akibat penarikan warga berkebangsaan Belanda dari wilayah Indonesia. Pelayanan kesehatan diambil alih oleh perawat yang membantu pada saat itu, Bapak Isakh Tella, Bapak Belipati serta perawat pembantu lainnya. Adapun Rumah Sakit Daerah Kalabahi berdiri diatas lahan  seluas  11.000 m2. Rumah Sakit Daerah Kalabahi merupakan salah satu rumah sakit yang berada di Kabupaten Alor dan merupakan satu-satunya rumah sakit rujukan tingkat pertama yang terletak di ibu kota Kabupaten Alor, yaitu Kalabahi.
+                    </p>
+                </div>
+
+                <!-- Struktur Organisasi Gambar PNG -->
+                <div id="struktur-section" class="scroll-mt-24 p-8 bg-white border border-slate-100 rounded-3xl shadow-md space-y-6">
+                    <h3 class="text-2xl font-extrabold text-brand-900 flex items-center gap-2">
+                        <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="git-branch" class="w-6 h-6"></i></span> Struktur Organisasi RSUD Kalabahi
+                    </h3>
+                    <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-x-auto">
+                        <img src="STRUKTUR_ORGANISASI_RSUD_KALABAHI_180801.png" class="max-w-full h-auto transition-transform hover:scale-[1.01] duration-300" alt="Struktur Organisasi RSUD Kalabahi" onerror="this.onerror=null; this.src='https://placehold.co/800x500/111844/ffffff?text=Struktur+Organisasi+RSUD+Kalabahi';">
+                    </div>
+                </div>
+
+                <!-- Tugas & Fungsi -->
+                <div id="tupoksi-section" class="scroll-mt-24 p-8 bg-white border border-slate-100 rounded-3xl shadow-md space-y-8">
+                    <h3 class="text-2xl font-extrabold text-brand-900 flex items-center gap-2">
+                        <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="clipboard-list" class="w-6 h-6"></i></span> Tugas Pokok & Fungsi
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                        <div class="md:col-span-4 bg-brand-50 p-6 rounded-2xl border border-brand-100">
+                            <h4 class="text-lg font-bold text-brand-900 mb-2">Tugas Pokok</h4>
+                            <p class="text-slate-700 text-sm leading-relaxed">Penyelenggaraan pelayanan kesehatan secara paripurna bagi masyarakat Kabupaten Alor.</p>
+                        </div>
+                        <div class="md:col-span-8 space-y-3">
+                            <h4 class="text-lg font-bold text-slate-800 mb-2">Fungsi Utama:</h4>
+                            <ul class="space-y-2 text-slate-600 text-sm">
+                                <li class="flex items-start gap-2.5">
+                                    <span class="shrink-0">✔️</span>
+                                    <span>Penyusunan rencana kerja RSUD Kalabahi;</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="shrink-0">✔️</span>
+                                    <span>Perumusan kebijakan teknis penyelenggaraan pelayanan kesehatan;</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="shrink-0">✔️</span>
+                                    <span>Penyelenggaraan pelayanan pengobatan, pemulihan kesehatan, kegawatdaruratan dan pelayanan rujukan sesuai standar pelayanan rumah sakit;</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="shrink-0">✔️</span>
+                                    <span>Pemeliharaan and peningkatan kesehatan perorangan melalui pelayanan yang paripurna;</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="shrink-0">✔️</span>
+                                    <span>Penyelenggaraan pengembangan sumber daya manusia kesehatan melalui pelayanan pendidikan dan pelatihan teknis sumber daya manusia kesehatan serta fasilitasi penelitian;</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="shrink-0">✔️</span>
+                                    <span>Evaluasi dan pelaporan penyelenggaraan pelayanan kesehatan;</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="shrink-0">✔️</span>
+                                    <span>Pelaksanaan kesekretariatan rumah sakit; dan</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="shrink-0">✔️</span>
+                                    <span>Pelaksanaan fungsi lain yang diberikan oleh Kepala Dinas sesuai tugas dan fungsinya.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visi & Misi -->
+                <div id="visimisi-section" class="scroll-mt-24 grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                    <div class="bg-white p-8 border border-slate-100 rounded-3xl shadow-md space-y-4">
+                        <h4 class="text-2xl font-extrabold text-brand-900 flex items-center gap-2">
+                            <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="target" class="w-6 h-6"></i></span> Visi
+                        </h4>
+                        <p class="text-slate-700 text-base leading-relaxed italic border-l-4 border-accent-400 pl-4">
+                            "Mewujudkan Rumah Sakit Umum Daerah Kalabahi yang unggul dalam kualitas pelayanan oleh tenaga profesional dengan mengutamakan keselamatan pasien”.
+                        </p>
+                    </div>
+                    <div class="bg-white p-8 border border-slate-100 rounded-3xl shadow-md space-y-4">
+                        <h4 class="text-2xl font-extrabold text-brand-900 flex items-center gap-2">
+                            <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="rocket" class="w-6 h-6"></i></span> Misi
+                        </h4>
+                        <ul class="space-y-3 text-slate-600 text-sm">
+                            <li class="flex items-start gap-2.5">
+                                <span class="shrink-0">🔹</span>
+                                <span>Meningkatkan pelayanan kesehatan rujukan bagi masyarakat;</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="shrink-0">🔹</span>
+                                <span>Menyelenggarakan pelayanan yang berorientasi pada kepuasan pasien;</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="shrink-0">🔹</span>
+                                <span>Memberikan pelayanan prima dengan memperhatikan keramah-tamahan;</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="shrink-0">🔹</span>
+                                <span>Meningkatkan kompetensi SDM melalui pendidikan & pelatihan;</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="shrink-0">🔹</span>
+                                <span>Meningkatkan kapasitas rumah sakit dengan pemenuhan sarana & prasarana;</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="shrink-0">🔹</span>
+                                <span>Meningkatkan motivasi dan kesejahteraan karyawan.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Moto & Nilai Card -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div id="moto-section" class="scroll-mt-24 p-8 bg-gradient-to-br from-[#111844] to-[#4B5694] text-white rounded-3xl shadow-md flex flex-col justify-center text-center">
+                        <span class="text-xs uppercase font-extrabold tracking-widest text-accent-400 mb-2">Moto RSUD Kalabahi</span>
+                        <h4 class="text-3xl font-black italic">"Pelayanan bermutu adalah komitmen kami."</h4>
+                    </div>
+                    <div id="nilai-section" class="scroll-mt-24 p-8 bg-white border border-slate-100 rounded-3xl shadow-md">
+                        <h4 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="heart" class="w-5 h-5 text-red-500"></i> Nilai Kerja "ALOR"</h4>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-start gap-1">
+                                <strong class="text-slate-800 shrink-0 w-32 md:w-36">Aman :</strong>
+                                <span class="text-slate-600">Mengutamakan keamanan, kenyamanan & keselamatan pasien.</span>
+                            </li>
+                            <li class="flex items-start gap-1">
+                                <strong class="text-slate-800 shrink-0 w-32 md:w-36">Luhur :</strong>
+                                <span class="text-slate-600">Perilaku moral baik berdasarkan etika medis.</span>
+                            </li>
+                            <li class="flex items-start gap-1">
+                                <strong class="text-slate-800 shrink-0 w-32 md:w-36">Orientasi Mutu :</strong>
+                                <span class="text-slate-600">Fokus utama kepuasan pasien.</span>
+                            </li>
+                            <li class="flex items-start gap-1">
+                                <strong class="text-slate-800 shrink-0 w-32 md:w-36">Ramah :</strong>
+                                <span class="text-slate-600">Senyum tulus, cepat tanggap, peduli keluhan.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= RAWAT JALAN SECTION ================= -->
+        <section id="sec-rawatjalan" class="tab-panel hidden">
+            <!-- HERO -->
+            <div class="bg-gradient-to-r from-[#111844] to-[#4B5694] py-16 px-4 text-white text-center">
+                <h2 class="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight uppercase">PELAYANAN RAWAT JALAN</h2>
+                <div class="w-24 h-1.5 bg-accent-400 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="max-w-5xl mx-auto px-4 py-16 space-y-16">
+                
+                <!-- Alur Pendaftaran -->
+                <div id="alur-jalan-section" class="scroll-mt-24 space-y-8">
+
+                    <!-- Submenu Tombol Jadwal Dokter Poliklinik Berbentuk Tombol di atas Hari & Jam Pelayanan -->
+                    <div class="p-6 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-3xl shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-500 text-white flex items-center justify-center shadow-md shrink-0">
+                                <i data-lucide="calendar" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-base font-extrabold text-slate-900">Jadwal Praktik Dokter Poliklinik</h4>
+                                <p class="text-xs text-slate-600">Cek ketersediaan dan jadwal praktik dokter spesialis terkini secara daring.</p>
+                            </div>
+                        </div>
+                        <a href="https://sites.google.com/view/jadwal-dokter-rsud-kalabahi/halaman-muka" target="_blank" class="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-5 py-3 rounded-xl text-sm shadow-md transition transform active:scale-95 shrink-0">
+                            <span>Jadwal Dokter Poliklinik</span>
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+
+                    <!-- Hari & Jam Pelayanan + Persyaratan Berobat -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Hari & Jam Pelayanan -->
+                        <div class="p-8 bg-white border border-slate-100 rounded-3xl shadow-md space-y-6">
+                            <h3 class="text-xl font-extrabold text-brand-900 flex items-center gap-2 border-b border-slate-100 pb-3">
+                                <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="clock" class="w-5 h-5"></i></span> Hari & Jam Pelayanan
+                            </h3>
+                            <div class="space-y-4 text-sm">
+                                <div class="flex items-center justify-between p-3.5 bg-slate-50 rounded-xl border border-slate-100">
+                                    <span class="font-bold text-slate-700">Hari Pelayanan:</span>
+                                    <span class="font-extrabold text-brand-700">Senin – Sabtu</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3.5 bg-slate-50 rounded-xl border border-slate-100">
+                                    <span class="font-bold text-slate-700">Libur:</span>
+                                    <span class="font-extrabold text-red-600">Minggu & Hari Libur Nasional</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3.5 bg-brand-50 border border-brand-100 rounded-xl">
+                                    <span class="font-bold text-brand-900">Pendaftaran di TPP:</span>
+                                    <span class="font-extrabold text-brand-600">Mulai 07.15 WITA</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Persyaratan Berobat -->
+                        <div class="p-8 bg-white border border-slate-100 rounded-3xl shadow-md space-y-6">
+                            <h3 class="text-xl font-extrabold text-brand-900 flex items-center gap-2 border-b border-slate-100 pb-3">
+                                <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="file-text" class="w-5 h-5"></i></span> Persyaratan Berobat
+                            </h3>
+                            <p class="text-xs text-slate-500 font-semibold mb-1">Sebelum datang ke RSUD Kalabahi, harap menyiapkan dokumen berikut:</p>
+                            <ul class="space-y-3.5 text-sm text-slate-700">
+                                <li class="flex items-start gap-2.5">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i>
+                                    <div>
+                                        <strong class="text-slate-800">Kartu Identitas</strong>
+                                        <p class="text-xs text-slate-500">KTP atau Kartu Keluarga (KK).</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i>
+                                    <div>
+                                        <strong class="text-slate-800">Surat Rujukan dari FKTP</strong>
+                                        <p class="text-xs text-slate-500 text-justify">Puskesmas atau Klinik. RSUD Kalabahi merupakan FKRTL sehingga pasien BPJS wajib membawa rujukan yang masih berlaku.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i>
+                                    <div>
+                                        <strong class="text-slate-800">Surat Kontrol</strong>
+                                        <p class="text-xs text-slate-500">Bagi pasien yang menjalani pemeriksaan lanjutan.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Alur Pelayanan (11 Steps) -->
+                    <div class="p-8 bg-white border border-slate-100 rounded-3xl shadow-md space-y-6">
+                        <h3 class="text-2xl font-extrabold text-brand-900 flex items-center gap-2 border-b border-slate-100 pb-4">
+                            <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="git-commit" class="w-6 h-6"></i></span> Alur Pelayanan Rawat Jalan
+                        </h3>
+                        
+                        <div class="space-y-6">
+                            <!-- Step 1 -->
+                            <div class="flex gap-4 items-start pb-6 border-b border-slate-100">
+                                <span class="bg-brand-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-extrabold shrink-0">1</span>
+                                <div class="space-y-1">
+                                    <h4 class="font-extrabold text-slate-900 text-base">Ambil Nomor Antrian</h4>
+                                    <p class="text-sm text-slate-600">Pasien mengambil nomor antrian di Loket Nomor Antrian.</p>
+                                    <p class="text-xs text-brand-600 font-bold bg-brand-50/70 p-2.5 rounded-lg inline-block mt-2">
+                                        💡 Bagi pasien yang telah mengambil nomor antrian melalui aplikasi Mobile JKN, melakukan scan barcode sesuai petunjuk petugas.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="flex gap-4 items-start pb-6 border-b border-slate-100">
+                                <span class="bg-brand-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-extrabold shrink-0">2</span>
+                                <div class="space-y-1">
+                                    <h4 class="font-extrabold text-slate-900 text-base">Skrining Awal</h4>
+                                    <p class="text-sm text-slate-600">Pasien menuju Meja Skrining untuk menjalani pemeriksaan awal and verifikasi surat rujukan atau surat kontrol.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="flex gap-4 items-start pb-6 border-b border-slate-100">
+                                <span class="bg-brand-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-extrabold shrink-0">3</span>
+                                <div class="space-y-1">
+                                    <h4 class="font-extrabold text-slate-900 text-base">Menunggu Pendaftaran</h4>
+                                    <p class="text-sm text-slate-600">Apabila hasil skrining and dokumen telah dinyatakan lengkap, pasien dipersilakan menunggu panggilan di tempat duduk di depan Loket Pendaftaran.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div class="flex gap-4 items-start pb-6 border-b border-slate-100">
+                                <span class="bg-brand-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-extrabold shrink-0">4</span>
+                                <div class="space-y-2">
+                                    <h4 class="font-extrabold text-slate-900 text-base">Pendaftaran di TPP</h4>
+                                    <p class="text-sm text-slate-600">Pasien melakukan pendaftaran sesuai nomor antrian yang ditampilkan pada layar monitor.</p>
+                                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 space-y-2 mt-2">
+                                        <p class="text-xs font-bold text-slate-700">Tersedia 4 Loket Pendaftaran, yaitu:</p>
+                                        <ul class="list-disc list-inside text-xs text-slate-600 space-y-1.5 pl-1">
+                                            <li><strong class="text-slate-800">Loket 1:</strong> Khusus untuk nomor antrian online</li>
+                                            <li><strong class="text-slate-800">Loket 2:</strong> Khusus pasien puasa yang akan menjalani pemeriksaan laboratorium.</li>
+                                            <li><strong class="text-slate-800">Loket 3 and 4:</strong> Untuk nomor antrian manual</li>
+                                        </ul>
+                                        <p class="text-[10px] text-slate-500 italic mt-1 font-semibold leading-normal border-t border-slate-200/65 pt-1.5">
+                                            💡 Note: Apabila loket 1 dan 2 sedang tidak menerima pasiennya maka kedua loket ini tetap melayani nomor antrian manual.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 5 -->
+                            <div class="flex gap-4 items-start pb-6 border-b border-slate-100">
+                                <span class="bg-brand-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-extrabold shrink-0">5</span>
+                                <div class="space-y-2">
+                                    <h4 class="font-extrabold text-slate-900 text-base">Menuju Poliklinik Tujuan</h4>
+                                    <p class="text-sm text-slate-600">After pendaftaran selesai, pasien diarahkan menuju poliklinik sesuai tujuan, antara lain:</p>
+                                    <div class="flex flex-wrap gap-2 pt-1">
+                                        <span class="bg-slate-100 text-slate-800 text-[11px] font-bold px-3 py-1.5 rounded-lg border border-slate-200">Poli Penyakit Dalam (Interna)</span>
+                                        <span class="bg-slate-100 text-slate-800 text-[11px] font-bold px-3 py-1.5 rounded-lg border border-slate-200">Poli Anak</span>
+                                        <span class="bg-slate-100 text-slate-800 text-[11px] font-bold px-3 py-1.5 rounded-lg border border-slate-200">Poli Bedah</span>
+                                        <span class="bg-slate-100 text-slate-800 text-[11px] font-bold px-3 py-1.5 rounded-lg border border-slate-200">Poli THT</span>
+                                        <span class="bg-slate-100 text-slate-800 text-[11px] font-bold px-3 py-1.5 rounded-lg border border-slate-200">Poli Gigi</span>
+                                        <span class="bg-slate-100 text-slate-800 text-[11px] font-bold px-3 py-1.5 rounded-lg border border-slate-200">Poli Jantung</span>
+                                        <span class="bg-slate-100 text-slate-800 text-[11px] font-bold px-3 py-1.5 rounded-lg border border-slate-200">Poli Saraf</span>
+                                        <span class="bg-slate-100 text-slate-800 text-[11px] font-bold px-3 py-1.5 rounded-lg border border-slate-200">Poli Obgyn</span>
+                                        <span class="bg-slate-100 text-slate-800 text-[11px] font-bold px-3 py-1.5 rounded-lg border border-slate-200">Poli MCU</span>
+                                        <span class="bg-slate-100 text-slate-800 text-[11px] font-bold px-3 py-1.5 rounded-lg border border-slate-200">VCT</span>
+                                        <span class="bg-slate-100 text-slate-800 text-[11px] font-bold px-3 py-1.5 rounded-lg border border-slate-200">TB DOTS</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 6 -->
+                            <div class="flex gap-4 items-start pb-6 border-b border-slate-100">
+                                <span class="bg-brand-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-extrabold shrink-0">6</span>
+                                <div class="space-y-1">
+                                    <h4 class="font-extrabold text-slate-900 text-base">Pemeriksaan Awal</h4>
+                                    <p class="text-sm text-slate-600">Sebelum bertemu dokter, petugas akan melakukan anamnesis (wawancara mengenai keluhan pasien) and pemeriksaan awal sesuai kebutuhan.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 7 -->
+                            <div class="flex gap-4 items-start pb-6 border-b border-slate-100">
+                                <span class="bg-brand-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-extrabold shrink-0">7</span>
+                                <div class="space-y-1">
+                                    <h4 class="font-extrabold text-slate-900 text-base">Pemeriksaan oleh Dokter</h4>
+                                    <p class="text-sm text-slate-600">Pasien dipanggil sesuai nomor antrian untuk menjalani pemeriksaan oleh dokter.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 8 -->
+                            <div class="flex gap-4 items-start pb-6 border-b border-slate-100">
+                                <span class="bg-brand-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-extrabold shrink-0">8</span>
+                                <div class="space-y-2">
+                                    <h4 class="font-extrabold text-slate-900 text-base">Setelah Pemeriksaan Dokter</h4>
+                                    <p class="text-sm text-slate-600 font-semibold text-justify">Setelah pemeriksaan selesai, dokter akan menentukan tindak lanjut pelayanan sesuai dengan kondisi pasien, yaitu:</p>
+                                    <ul class="list-disc list-outside text-xs text-slate-600 space-y-2.5 pl-5 mt-2 text-justify">
+                                        <li>Pasien diperbolehkan pulang dan menerima resep obat untuk diambil di Apotek Rawat Jalan.</li>
+                                        <li>Pasien menjalani pemeriksaan penunjang, seperti pemeriksaan laboratorium, rontgen, USG, atau fisioterapi sesuai indikasi medis.</li>
+                                        <li>Pasien menjalani rawat inap untuk mendapatkan perawatan lebih lanjut.</li>
+                                        <li>Pasien dirujuk kembali ke Fasilitas Kesehatan Tingkat Pertama (FKTP), seperti puskesmas atau klinik, apabila kondisi pasien sudah dapat ditangani di fasilitas tersebut.</li>
+                                        <li>Pasien dirujuk ke Fasilitas Kesehatan Rujukan Tingkat Lanjutan (FKRTL) di luar Kabupaten Alor apabila memerlukan pelayanan atau tindakan medis yang tidak tersedia di RSUD Kalabahi.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Step 9 -->
+                            <div class="flex gap-4 items-start pb-6 border-b border-slate-100">
+                                <span class="bg-brand-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-extrabold shrink-0">9</span>
+                                <div class="space-y-4 flex-grow">
+                                    <h4 class="font-extrabold text-slate-900 text-base">Layanan di Meja Informasi</h4>
+                                    <p class="text-sm text-slate-600">Sebelum mengambil obat, pasien diarahkan ke Meja Informasi untuk mendapatkan explanation mengenai:</p>
+                                    
+                                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-2">
+                                        <!-- a. Surat Kontrol -->
+                                        <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl space-y-2">
+                                            <span class="text-xs font-black text-brand-600 uppercase tracking-wider block">a. Surat Kontrol</span>
+                                            <p class="text-xs text-slate-600 leading-relaxed text-justify">
+                                                Pasien yang menerima surat kontrol wajib kembali ke Loket Pendaftaran agar jadwal kontrol dapat diinput ke dalam sistem sebelum pulang. Pasien kemudian datang kembali sesuai tanggal yang telah ditentukan oleh dokter.
+                                            </p>
+                                        </div>
+                                        <!-- b. Surat Rujukan Balik -->
+                                        <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl space-y-2 text-justify">
+                                            <span class="text-xs font-black text-brand-600 uppercase tracking-wider block">b. Surat Rujukan Balik</span>
+                                            <p class="text-xs text-slate-600 leading-relaxed">
+                                                Diberikan apabila kondisi pasien sudah stabil dan pelayanan selanjutnya dapat diberikan oleh FKTP yaitu Puskesmas atau Klinik.
+                                            </p>
+                                        </div>
+                                        <!-- c. Rujukan Ke luar Alor -->
+                                        <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl space-y-2">
+                                            <span class="text-xs font-black text-brand-600 uppercase tracking-wider block">c. Rujukan Ke luar Alor</span>
+                                            <p class="text-xs text-slate-600 leading-relaxed text-justify">
+                                                Pasien mengambil nomor surat di Lantai 3 RSUD Kalabahi, kemudian kembali ke Loket Pendaftaran. Petugas akan memproses rujukan secara online agar dapat diterima oleh fasilitas kesehatan tujuan.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 10 -->
+                            <div class="flex gap-4 items-start pb-6 border-b border-slate-100">
+                                <span class="bg-brand-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-extrabold shrink-0">10</span>
+                                <div class="space-y-1">
+                                    <h4 class="font-extrabold text-slate-900 text-base">Pengambilan Obat</h4>
+                                    <p class="text-sm text-slate-600">Setelah seluruh proses pelayanan selesai, pasien mengambil obat di Apotek Rawat Jalan sesuai resep dokter.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 11 -->
+                            <div class="flex gap-4 items-start">
+                                <span class="bg-brand-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-extrabold shrink-0">11</span>
+                                <div class="space-y-1">
+                                    <h4 class="font-extrabold text-slate-900 text-base">Pembayaran Pasien Umum</h4>
+                                    <p class="text-sm text-slate-600 text-justify">Khusus pasien umum (non-BPJS), sebelum mengambil obat di Apotek Rawat Jalan harus melakukan pembayaran biaya pelayanan dan obat yang dilakukan di Kasir I apabila Bank BPD NTT buka atau Kasir II apabila Bank BPD NTT tutup. <br><span class="block mt-2 text-xs font-bold text-brand-600">Note: Bank BPD NTT terletak di depan IGD RSUD Kalabahi</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Infografis Pelayanan Rawat Jalan -->
+                    <div class="p-8 bg-white border border-slate-100 rounded-3xl shadow-md space-y-6">
+                        <h3 class="text-xl font-extrabold text-brand-900 flex items-center gap-2 border-b border-slate-100 pb-4">
+                            <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="image" class="w-5 h-5"></i></span> Infografis Pelayanan Rawat Jalan
+                        </h3>
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                            <img 
+                                src="INFOGRAFIS_PELAYANAN_RAWAT_JALAN.png" 
+                                class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                alt="Infografis Pelayanan Rawat Jalan"
+                                onerror="this.onerror=null; this.src='https://placehold.co/800x1200/111844/ffffff?text=INFOGRAFIS+PELAYANAN+RAWAT+JALAN';"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Gambar Poliklinik -->
+                    <div id="gambar-poli-section" class="scroll-mt-24 p-8 bg-white border border-slate-100 rounded-3xl shadow-md space-y-6">
+                        <h3 class="text-xl font-extrabold text-brand-900 flex items-center gap-2 border-b border-slate-100 pb-4">
+                            <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="image" class="w-5 h-5"></i></span> Gambar Poliklinik
+                        </h3>
+                        
+                        <!-- Grid Tata Letak Gambar Poliklinik -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Gambar 1 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RUANG_POLI_01.png" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Gambar Poliklinik 01"
+                                    onerror="this.onerror=null; this.src='RUANG_POLI_01.jpg';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 2 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RUANG_POLI_02.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Gambar Poliklinik 02"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RUANG+POLI+02';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 3 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RUANG_POLI_03.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Gambar Poliklinik 03"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RUANG+POLI+03';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 4 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RUANG_POLI_04.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Gambar Poliklinik 04"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RUANG+POLI+04';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 5 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner md:col-span-2">
+                                <img 
+                                    src="RUANG_POLI_05.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Gambar Poliklinik 05"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/1200x530/111844/ffffff?text=RUANG+POLI+05';"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= RAWAT INAP SECTION ================= -->
+        <section id="sec-rawatinap" class="tab-panel hidden">
+            <!-- HERO -->
+            <div class="bg-gradient-to-r from-[#111844] to-[#4B5694] py-16 px-4 text-white text-center">
+                <h2 class="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight uppercase">PELAYANAN RAWAT INAP</h2>
+                <div class="w-24 h-1.5 bg-accent-400 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="max-w-5xl mx-auto px-4 py-16 space-y-16">
+                
+                <!-- Ruang Perawatan & Animasi/Karakteristik -->
+                <div id="ruang-section" class="scroll-mt-24 p-8 bg-white border border-slate-100 rounded-3xl shadow-md space-y-6">
+                    <h3 class="text-2xl font-extrabold text-brand-900 flex items-center gap-2">
+                        <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="bed" class="w-6 h-6"></i></span> Ruang Perawatan RSUD Kalabahi
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="ruang-perawatan-grid">
+                        <!-- Filled dynamically by JS -->
+                    </div>
+                </div>
+
+                <!-- SUB MENU: JUMLAH TEMPAT TIDUR DI RUANG PERAWATAN -->
+                <div id="jumlah-bed-section" class="scroll-mt-24 p-8 bg-white border border-slate-100 rounded-3xl shadow-md space-y-6">
+                    <h3 class="text-2xl font-extrabold text-brand-900 flex items-center gap-2 border-b border-slate-100 pb-4">
+                        <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="layers" class="w-6 h-6"></i></span> Jumlah Tempat Tidur di Ruang Perawatan
+                    </h3>
+                    <div class="space-y-6 text-slate-700 text-sm">
+                        
+                        <!-- 1 -->
+                        <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl space-y-2">
+                            <h4 class="font-extrabold text-brand-900 text-base">Ruang Perawatan Penyakit Dalam (RPPD)</h4>
+                            <ul class="list-disc list-inside space-y-1 pl-2 text-slate-600">
+                                <li>Kelas 3 / Non Kelas : 24 Tempat Tidur</li>
+                            </ul>
+                        </div>
+
+                        <!-- 2 -->
+                        <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl space-y-2">
+                            <h4 class="font-extrabold text-brand-900 text-base">Ruang Perawatan Anak (RPA)</h4>
+                            <ul class="list-disc list-inside space-y-1 pl-2 text-slate-600">
+                                <li>Kelas 2 : 4 Tempat Tidur</li>
+                                <li>Kelas 3 / Non Kelas : 8 Tempat Tidur</li>
+                            </ul>
+                        </div>
+
+                        <!-- 3 -->
+                        <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl space-y-2">
+                            <h4 class="font-extrabold text-brand-900 text-base">Ruang Perawatan Penyakit Infeksi (RPPI)</h4>
+                            <ul class="list-disc list-inside space-y-1 pl-2 text-slate-600">
+                                <li>Kelas 3 / Non Kelas : 12 Tempat Tidur</li>
+                            </ul>
+                        </div>
+
+                        <!-- 4 -->
+                        <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl space-y-2">
+                            <h4 class="font-extrabold text-brand-900 text-base">Ruang Perawatan Bedah (RPB)</h4>
+                            <ul class="list-disc list-inside space-y-1 pl-2 text-slate-600">
+                                <li>Kelas 2 : 4 Tempat Tidur</li>
+                                <li>Kelas 3 / Non Kelas : 10 Tempat Tidur</li>
+                            </ul>
+                        </div>
+
+                        <!-- 5 -->
+                        <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl space-y-2">
+                            <h4 class="font-extrabold text-brand-900 text-base">Ruang Perawatan Utama (RPU)</h4>
+                            <ul class="list-disc list-inside space-y-1 pl-2 text-slate-600">
+                                <li>Kelas 1 : 8 Tempat Tidur</li>
+                                <li>VIP : 3 Tempat Tidur</li>
+                            </ul>
+                        </div>
+
+                        <!-- 6 -->
+                        <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl space-y-2">
+                            <h4 class="font-extrabold text-brand-900 text-base">Ruang Perawatan Obgyn (RPO)</h4>
+                            <ul class="list-disc list-inside space-y-1 pl-2 text-slate-600">
+                                <li>Kelas 2 : 4 Tempat Tidur</li>
+                                <li>Kelas 3 / Non Kelas : 12 Tempat Tidur</li>
+                            </ul>
+                        </div>
+
+                        <!-- 7 -->
+                        <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl space-y-2">
+                            <h4 class="font-extrabold text-brand-900 text-base">Kamar Bersalin/VK</h4>
+                            <ul class="list-disc list-inside space-y-1 pl-2 text-slate-600">
+                                <li>Kelas 3 / Non Kelas : 6 Tempat Tidur</li>
+                            </ul>
+                        </div>
+
+                        <!-- 8 -->
+                        <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl space-y-2">
+                            <h4 class="font-extrabold text-brand-900 text-base">Ruang Perinatologi</h4>
+                            <ul class="list-disc list-inside space-y-1 pl-2 text-slate-600">
+                                <li>Kelas 3 / Non Kelas : 13 Tempat Tidur</li>
+                            </ul>
+                        </div>
+
+                        <!-- 9 -->
+                        <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl space-y-2">
+                            <h4 class="font-extrabold text-brand-900 text-base">Ruang Intensive Care Unit (ICU)</h4>
+                            <ul class="list-disc list-inside space-y-1 pl-2 text-slate-600">
+                                <li>Kelas 3 / Non Kelas : 7 Tempat Tidur</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- GAMBAR RUANG PERAWATAN -->
+                <div id="gambar-ruang-section" class="scroll-mt-24 p-8 bg-white border border-slate-100 rounded-3xl shadow-md space-y-6">
+                    <h3 class="text-2xl font-extrabold text-brand-900 flex items-center gap-2">
+                        <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="image" class="w-6 h-6"></i></span> Gambar Ruang Perawatan
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <h4 class="text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">Ruang Perawatan Penyakit Dalam (RPPD)</h4>
+                        
+                        <!-- Grid Tata Letak Gambar RPPD -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Gambar 1 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPPD_01.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Penyakit Dalam 01"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPPD+01';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 2 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPPD_02.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Penyakit Dalam 02"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPPD+02';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 3 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPPD_03.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Penyakit Dalam 03"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPPD+03';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 4 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPPD_04.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Penyakit Dalam 04"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPPD+04';"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 mt-8">
+                        <h4 class="text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">Ruang Perawatan Penyakit Infeksi (RPPI)</h4>
+                        
+                        <!-- Grid Tata Letak Gambar RPPI -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Gambar 1 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPPI_01.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Penyakit Infeksi 01"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPPI+01';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 2 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPPI_02.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Penyakit Infeksi 02"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPPI+02';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 3 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPPI_03.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Penyakit Infeksi 03"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPPI+03';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 4 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPPI_04.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Penyakit Infeksi 04"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPPI+04';"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 mt-8">
+                        <h4 class="text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">Ruang Perawatan Anak (RPA)</h4>
+                        
+                        <!-- Grid Tata Letak Gambar RPA -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Gambar 1 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPA_01.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Anak 01"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPA+01';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 2 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPA_02.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Anak 02"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPA+02';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 3 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPA_03.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Anak 03"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPA+03';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 4 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPA_04.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Anak 04"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPA+04';"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 mt-8">
+                        <h4 class="text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">Ruang Perawatan Bedah (RPB)</h4>
+                        
+                        <!-- Grid Tata Letak Gambar RPB -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Gambar 1 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPB_01.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Bedah 01"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPB+01';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 2 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPB_02.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Bedah 02"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPB+02';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 3 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPB_03.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Bedah 03"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPB+03';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 4 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPB_04.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Bedah 04"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPB+04';"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 mt-8">
+                        <h4 class="text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">Ruang Perawatan Utama (RPU)</h4>
+                        
+                        <!-- Grid Tata Letak Gambar RPU -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Gambar 1 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPU_01.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Utama 01"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPU+01';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 2 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPU_02.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Utama 02"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPU+02';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 3 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPU_03.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Utama 03"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPU+03';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 4 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPU_04.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Utama 04"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPU+04';"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 mt-8">
+                        <h4 class="text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">Ruang Perawatan Obgyn (RPO)</h4>
+                        
+                        <!-- Grid Tata Letak Gambar RPO -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <!-- Gambar 1 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPO_01.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Obgyn 01"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPO+01';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 2 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPO_02.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Obgyn 02"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPO+02';"
+                                >
+                            </div>
+                            
+                            <!-- Gambar 3 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                                <img 
+                                    src="RPO_03.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perawatan Obgyn 03"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=RPO+03';"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 mt-8">
+                        <h4 class="text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">Kamar Bersalin/VK</h4>
+                        
+                        <!-- Grid Tata Letak Gambar VK -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Gambar 1 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner md:col-span-2">
+                                <img 
+                                    src="VK_01.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Kamar Bersalin/VK 01"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/1200x530/111844/ffffff?text=VK+01';"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 mt-8">
+                        <h4 class="text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">Ruang Perinatologi</h4>
+                        
+                        <!-- Grid Tata Letak Gambar Perinatologi -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Gambar 1 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner md:col-span-2">
+                                <img 
+                                    src="PERINA_01.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Perinatologi 01"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/1200x530/111844/ffffff?text=PERINA+01';"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 mt-8">
+                        <h4 class="text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">Ruang Intensive Care Unit (ICU)</h4>
+                        
+                        <!-- Grid Tata Letak Gambar ICU -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Gambar 1 -->
+                            <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner md:col-span-2">
+                                <img 
+                                    src="ICU_01.jpg" 
+                                    class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                    alt="Ruang Intensive Care Unit (ICU) 01"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/1200x530/111844/ffffff?text=ICU+01';"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= IGD SECTION ================= -->
+        <section id="sec-igd" class="tab-panel hidden">
+            <!-- HERO -->
+            <div class="bg-gradient-to-r from-[#111844] to-[#4B5694] py-16 px-4 text-white text-center">
+                <h2 class="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight uppercase">PELAYANAN INSTALASI GAWAT DARURAT (IGD)</h2>
+                <div class="w-24 h-1.5 bg-accent-400 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="max-w-5xl mx-auto px-4 py-16 space-y-16">
+                
+                <!-- Alur Pelayanan IGD Container -->
+                <div id="alur-igd-section" class="scroll-mt-24 space-y-8">
+                    <!-- Hari & Jam Pelayanan + Persyaratan -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Hari & Jam Pelayanan -->
+                        <div class="p-8 bg-white border border-slate-100 rounded-3xl shadow-md space-y-6">
+                            <h3 class="text-xl font-extrabold text-brand-900 flex items-center gap-2 border-b border-slate-100 pb-3">
+                                <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="clock" class="w-5 h-5"></i></span> Hari & Jam Pelayanan
+                            </h3>
+                            <div class="space-y-4 text-sm">
+                                <p class="text-slate-600 leading-relaxed text-justify">
+                                    Instalasi Gawat Darurat (IGD) RSUD Kalabahi melayani pasien selama <strong>24 jam setiap hari</strong>, termasuk hari Minggu dan hari libur nasional.
+                                </p>
+                                <div class="flex items-center justify-between p-3.5 bg-red-50 border border-red-100 rounded-xl text-red-700 font-bold">
+                                    <span class="flex items-center text-red-600 animate-pulse">
+                                        <i data-lucide="activity" class="w-4 h-4 mr-1.5"></i> IGD: 24 Jam Non-Stop
+                                    </span>
+                                    <span>Aktif Selamanya</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Persyaratan -->
+                        <div class="p-8 bg-white border border-slate-100 rounded-3xl shadow-md space-y-6">
+                            <h3 class="text-xl font-extrabold text-brand-900 flex items-center gap-2 border-b border-slate-100 pb-3">
+                                <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="file-text" class="w-5 h-5"></i></span> Persyaratan
+                            </h3>
+                            <p class="text-xs text-slate-500 font-semibold mb-1">Pasien atau keluarga/pengantar diminta menyiapkan:</p>
+                            <ul class="space-y-3.5 text-sm text-slate-700">
+                                <li class="flex items-start gap-2.5">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i>
+                                    <div>
+                                        <strong class="text-slate-800">Kartu Tanda Penduduk (KTP) atau Kartu Keluarga (KK)</strong>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl text-xs text-amber-950 font-bold leading-normal">
+                                ⚠️ Catatan: Pada kondisi gawat darurat, pasien akan diprioritaskan untuk mendapatkan penanganan medis terlebih dahulu.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alur Pelayanan (5 Steps) -->
+                    <div class="p-8 bg-white border border-slate-100 rounded-3xl shadow-md space-y-6">
+                        <h3 class="text-2xl font-extrabold text-brand-900 flex items-center gap-2 border-b border-slate-100 pb-4">
+                            <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="git-commit" class="w-6 h-6"></i></span> Alur Pelayanan IGD
+                        </h3>
+                        
+                        <div class="space-y-6">
+                            <!-- Step 1 -->
+                            <div class="flex gap-4 items-start pb-6 border-b border-slate-100">
+                                <span class="bg-brand-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-extrabold shrink-0">1</span>
+                                <div class="space-y-1">
+                                    <h4 class="font-extrabold text-slate-900 text-base">Pasien Datang ke IGD</h4>
+                                    <p class="text-sm text-slate-600 text-justify">Pasien yang mengalami kondisi gawat darurat datang ke IGD and akan segera mendapatkan penanganan oleh dokter and perawat sesuai tingkat kegawatannya.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="flex gap-4 items-start pb-6 border-b border-slate-100">
+                                <span class="bg-brand-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-extrabold shrink-0">2</span>
+                                <div class="space-y-1">
+                                    <h4 class="font-extrabold text-slate-900 text-base">Penanganan Awal</h4>
+                                    <p class="text-sm text-slate-600 text-justify">Petugas medis melakukan pemeriksaan awal, termasuk pemeriksaan tanda-tanda vital (TTV), serta memberikan tindakan medis yang diperlukan.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="flex gap-4 items-start pb-6 border-b border-slate-100">
+                                <span class="bg-brand-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-extrabold shrink-0">3</span>
+                                <div class="space-y-2">
+                                    <h4 class="font-extrabold text-slate-900 text-base">Proses Pendaftaran</h4>
+                                    <p class="text-sm text-slate-600 text-justify">Setelah pasien mendapatkan penanganan awal, keluarga atau pengantar melakukan pendaftaran di TPP IGD (Tempat Pendaftaran Pasien IGD) dengan membawa:</p>
+                                    <ul class="list-disc list-inside text-xs text-slate-600 space-y-1 pl-1 text-justify">
+                                        <li>KTP atau Kartu Keluarga (KK) pasien.</li>
+                                        <li>Surat pengantar dari dokter IGD.</li>
+                                    </ul>
+                                    <div class="bg-brand-50 p-3.5 rounded-xl border border-brand-100 text-xs text-brand-900 font-bold leading-normal mt-2">
+                                        💡 <strong>Catatan:</strong> Pasien gawat atau darurat tidak memerlukan surat rujukan dari Fasilitas Kesehatan Tingkat Pertama (FKTP).
+                                        <p class="mt-1.5">Petugas TPP IGD akan memberikan lembar jaminan BPJS (SEP), kemudian berkas tersebut diserahkan kepada petugas IGD.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div class="flex gap-4 items-start pb-6 border-b border-slate-100">
+                                <span class="bg-brand-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-extrabold shrink-0">4</span>
+                                <div class="space-y-1">
+                                    <h4 class="font-extrabold text-slate-900 text-base">Keputusan Dokter</h4>
+                                    <p class="text-sm text-slate-600 text-justify">After pemeriksaan selesai, dokter akan menentukan apakah pasien boleh pulang atau harus rawat inap.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 5 -->
+                            <div class="flex gap-4 items-start">
+                                <span class="bg-brand-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-extrabold shrink-0">5</span>
+                                <div class="space-y-1">
+                                    <h4 class="font-extrabold text-slate-900 text-base">Pengambilan Obat</h4>
+                                    <p class="text-sm text-slate-600 text-justify">Keluarga atau pengantar pasien pergi ke apotek DEPO IGD untuk mengambil obat sesuai resep dokter. Khusus pasien umum harus membayar pembayaran biaya pelayanan and obat sebelum mengambil obat. Pembayaran dapat dilakukan di Kasir I apabila Bank BPD NTT buka atau Kasir II apabila Bank BPD NTT tutup.</p>
+                                    <span class="block mt-2 text-xs font-bold text-brand-600">Note: Bank BPD NTT terletak di depan IGD RSUD Kalabahi</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUB MENU: KAPASITAS & RINCIAN TEMPAT TIDUR / BRANKAR IGD -->
+                    <div id="kapasitas-igd-section" class="scroll-mt-24 p-8 bg-white border border-slate-100 rounded-3xl shadow-md space-y-6">
+                        <h3 class="text-2xl font-extrabold text-brand-900 flex items-center gap-2 border-b border-slate-100 pb-4">
+                            <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="bed" class="w-6 h-6"></i></span> Kapasitas dan Rincian Tempat Tidur / Brankar IGD
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Berikut adalah rincian kapasitas tempat tidur dan brankar di Instalasi Gawat Darurat (IGD) RSUD Kalabahi berdasarkan zona pelayanan:
+                        </p>
+
+                        <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm">
+                            <table class="w-full text-left border-collapse bg-white">
+                                <thead>
+                                    <tr class="bg-brand-900 text-white text-xs sm:text-sm font-bold uppercase">
+                                        <th class="py-3 px-4 border-b border-slate-200">Ruangan / Zona IGD</th>
+                                        <th class="py-3 px-4 border-b border-slate-200">Kapasitas Total</th>
+                                        <th class="py-3 px-4 border-b border-slate-200">Rincian / Fasilitas Penunjang</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-xs sm:text-sm divide-y divide-slate-100 text-slate-700">
+                                    <tr>
+                                        <td class="py-3.5 px-4 font-bold text-slate-900">Ruang Triase</td>
+                                        <td class="py-3.5 px-4 font-semibold">3 Tempat Tidur / Brankar</td>
+                                        <td class="py-3.5 px-4 text-slate-500">Pemeriksaan dan penentuan tingkat kegawatan awal pasien.</td>
+                                    </tr>
+                                    <tr class="bg-slate-50/50">
+                                        <td class="py-3.5 px-4 font-bold text-slate-900">Ruang Stabilisasi / Utama</td>
+                                        <td class="py-3.5 px-4 font-semibold">7 Tempat Tidur</td>
+                                        <td class="py-3.5 px-4">
+                                            <ul class="list-disc list-inside space-y-1 text-slate-600">
+                                                <li>Triase Merah: 2 Tempat Tidur</li>
+                                                <li>Triase Kuning: 1 Tempat Tidur</li>
+                                                <li>Triase Hijau: 1 Tempat Tidur</li>
+                                                <li>Triase Biru: 1 Tempat Tidur</li>
+                                                <li>Triase Putih: 1 Tempat Tidur</li>
+                                                <li>Infant Warmer: 1 Unit</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3.5 px-4 font-bold text-slate-900">Ruang Obgyn</td>
+                                        <td class="py-3.5 px-4 font-semibold">1 Tempat Tidur</td>
+                                        <td class="py-3.5 px-4 text-slate-600">Dilengkapi Fasilitas Penunjang: 1 Unit Infant Warmer</td>
+                                    </tr>
+                                    <tr class="bg-slate-50/50">
+                                        <td class="py-3.5 px-4 font-bold text-slate-900">Ruang Isolasi</td>
+                                        <td class="py-3.5 px-4 font-semibold">2 Tempat Tidur</td>
+                                        <td class="py-3.5 px-4 text-slate-500">Penanganan pasien infeksius dengan protokol khusus.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3.5 px-4 font-bold text-slate-900">Ruang Tindakan / Trauma</td>
+                                        <td class="py-3.5 px-4 font-semibold">2 Tempat Tidur</td>
+                                        <td class="py-3.5 px-4 text-slate-500">Penanganan kasus bedah darurat dan trauma kecelakaan.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Infografis Pelayanan IGD (A4 Size) -->
+                    <div class="p-8 bg-white border border-slate-100 rounded-3xl shadow-md space-y-6">
+                        <h3 class="text-xl font-extrabold text-brand-900 flex items-center gap-2 border-b border-slate-100 pb-4">
+                            <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="image" class="w-5 h-5"></i></span> Infografis Pelayanan IGD
+                        </h3>
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner max-w-2xl mx-auto">
+                            <img 
+                                src="INFOGRAFIS_PELAYANAN_IGD_180801.png" 
+                                class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.01] duration-300" 
+                                alt="Infografis Pelayanan IGD"
+                                onerror="this.onerror=null; this.src='https://placehold.co/800x1130/111844/ffffff?text=INFOGRAFIS+PELAYANAN+IGD';"
+                            >
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= FASILITAS SECTION ================= -->
+        <section id="sec-fasilitas" class="tab-panel hidden">
+            <!-- HERO -->
+            <div class="bg-gradient-to-r from-[#111844] to-[#4B5694] py-16 px-4 text-white text-center">
+                <h2 class="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight uppercase">FASILITAS & SARANA PRASARANA</h2>
+                <div class="w-24 h-1.5 bg-accent-400 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="max-w-5xl mx-auto px-4 py-16 space-y-12">
+                <div class="bg-white p-8 border border-slate-100 rounded-3xl shadow-md space-y-6">
+                    <h3 class="text-2xl font-extrabold text-brand-900 flex items-center gap-2">
+                        <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="shield" class="w-6 h-6"></i></span> Unit & Instalasi Pelayanan Kesehatan
+                    </h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Fasilitas, Sarana Dan Prasarana Pelayanan Kesehatan pada Rumah Sakit Daerah Kalabahi secara komparatif terdiri dari 9 Instalasi resmi and 22 Unit penunjang operasional, yaitu:
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Instalasi -->
+                    <div id="instalasi-section" class="scroll-mt-24 bg-white p-8 border border-slate-100 rounded-3xl shadow-md space-y-6">
+                        <h4 class="text-xl font-bold text-brand-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                            <i data-lucide="layers" class="w-5 h-5 text-accent-500"></i> Instalasi Pelayanan (9)
+                        </h4>
+                        <ul class="space-y-3 font-semibold text-sm text-slate-700">
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-brand-100 text-brand-600 rounded-lg flex items-center justify-center text-xs">1</span> Instalasi Rawat Jalan
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-brand-100 text-brand-600 rounded-lg flex items-center justify-center text-xs">2</span> Instalasi Rawat Inap
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-brand-100 text-brand-600 rounded-lg flex items-center justify-center text-xs">3</span> Instalasi Gawat Darurat
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-brand-100 text-brand-600 rounded-lg flex items-center justify-center text-xs">4</span> Instalasi Bedah Sentral
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">5</span> Instalasi Laboratorium
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-brand-100 text-brand-600 rounded-lg flex items-center justify-center text-xs">6</span> Instalansi Farmasi
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-brand-100 text-brand-600 rounded-lg flex items-center justify-center text-xs">7</span> Instalasi Rekam Medis
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-brand-100 text-brand-600 rounded-lg flex items-center justify-center text-xs">8</span> Instalasi Central Sterile Supply Departemen (CSSD)
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-brand-100 text-brand-600 rounded-lg flex items-center justify-center text-xs">9</span> Instalasi Pemeliharaan Sarana Rumah Sakit (IPSRS) & Alkes
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Unit -->
+                    <div id="unit-section" class="scroll-mt-24 bg-white p-8 border border-slate-100 rounded-3xl shadow-md space-y-6">
+                        <h4 class="text-xl font-bold text-brand-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                            <i data-lucide="cpu" class="w-5 h-5 text-accent-500"></i> Unit Pendukung Operasional (22)
+                        </h4>
+                        <ul class="space-y-3 font-semibold text-sm text-slate-700">
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">1</span> Unit Radiologi
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">2</span> Unit Transfusi Darah
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">3</span> Unit Gizi
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">4</span> Unit Fisioterapi
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">5</span> Unit Sanitasi
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">6</span> Unit Pendidikan, Pelatihan dan Penelitian Pengembangan (P4)
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">7</span> Unit Informasi, Pengaduan dan Humas
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">8</span> Unit Edukasi dan Promosi Kesehatan
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">9</span> Unit Pemulasaraan Jenazah
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">10</span> Unit Hemodialisa (HD)
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">11</span> Unit Voluntary Counseling and Testing (VCT) & Psikologi
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">12</span> Unit Directly Observed Treatment Shortcourse Center (DOTS Center)
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">13</span> Unit Sistem Informasi Manajemen Rumah Sakit (SIM-RS)
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">14</span> Unit Perbekalan Farmasi (UPF)
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">15</span> Unit Farmasi Klinis
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">16</span> Unit Loundry
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">17</span> Unit Sterilisasi
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">18</span> Unit Ketatausahaan & Kerumahtanggaan (KTRT)
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">19</span> Unit Pemasaran, Pelayanan Hukum & Kemitraan (PPHK)
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">20</span> Unit Kepegawaian & Sumber Daya Manusia (UP)
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">21</span> Unit Logistik
+                            </li>
+                            <li class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-brand-50 hover:text-brand-700 transition">
+                                <span class="w-7 h-7 bg-slate-200 text-slate-700 rounded-lg flex items-center justify-center text-xs">22</span> Unit Perbendaharaan & Mobilisasi Dana
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= DENAH RSUD SECTION ================= -->
+        <section id="sec-denah" class="tab-panel hidden">
+            <!-- HERO -->
+            <div class="bg-gradient-to-r from-[#111844] to-[#4B5694] py-16 px-4 text-white text-center">
+                <h2 class="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight uppercase">DENAH RUMAH SAKIT</h2>
+                <div class="w-24 h-1.5 bg-accent-400 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="max-w-5xl mx-auto px-4 py-16 space-y-12">
+                <!-- Denah RSUD Kalabahi Submenu Section -->
+                <div id="denah-rsud-kalabahi-section" class="scroll-mt-24 p-8 bg-white border border-slate-100 rounded-3xl shadow-md space-y-6">
+                    <h3 class="text-2xl font-extrabold text-brand-900 flex items-center gap-2">
+                        <span class="bg-brand-50 p-2 rounded-lg text-brand-500"><i data-lucide="map" class="w-6 h-6"></i></span> Denah RSUD Kalabahi
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <h4 class="text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">Denah Lantai 1 RSUD Kalabahi</h4>
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner">
+                            <img 
+                                src="DENAH_LANTAI_1_180801.png" 
+                                class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.03] duration-300 cursor-zoom-in" 
+                                alt="Denah Lantai 1 RSUD Kalabahi"
+                                onclick="openLightbox(this.src, this.alt)"
+                                onerror="this.onerror=null; this.src='https://placehold.co/800x530/111844/ffffff?text=DENAH+LANTAI+1+RSUD+KALABAHI';"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 mt-8">
+                        <h4 class="text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">Denah Lantai 2 RSUD Kalabahi</h4>
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner max-w-2xl mx-auto">
+                            <img 
+                                src="DENAHLANTAI2180801.png" 
+                                class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.03] duration-300 cursor-zoom-in" 
+                                alt="Denah Lantai 2 RSUD Kalabahi (A4 Portrait)"
+                                onclick="openLightbox(this.src, this.alt)"
+                                onerror="this.onerror=null; this.src='https://placehold.co/800x1130/111844/ffffff?text=DENAH+LANTAI+2+RSUD+KALABAHI';"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 mt-8">
+                        <h4 class="text-lg font-bold text-slate-800 border-l-4 border-brand-500 pl-3">Denah Lantai 3 RSUD Kalabahi</h4>
+                        <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 flex justify-center overflow-hidden shadow-inner max-w-2xl mx-auto">
+                            <img 
+                                src="DENAHLANTAI3180801.png" 
+                                class="max-w-full h-auto rounded-xl transition-transform hover:scale-[1.03] duration-300 cursor-zoom-in" 
+                                alt="Denah Lantai 3 RSUD Kalabahi (A4 Portrait)"
+                                onclick="openLightbox(this.src, this.alt)"
+                                onerror="this.onerror=null; this.src='https://placehold.co/800x1130/111844/ffffff?text=DENAH+LANTAI+3+RSUD+KALABAHI';"
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER SECTION ================= -->
+    <footer class="bg-slate-950 text-slate-300 pt-16 pb-8 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 text-sm">
+            <!-- Brand -->
+            <div class="space-y-6">
+                <div class="flex items-center gap-3">
+                    <!-- Lambang Pemkab Alor Gambar Terintegrasi di Footer -->
+                    <img src="LOGO_KAB_ALOR_180801.png" class="h-12 w-auto bg-white p-1 rounded-xl" alt="Logo Kabupaten Alor" onerror="this.onerror=null; this.src='https://placehold.co/100x100/111844/ffffff?text=Alor';">
+                    <h4 class="text-2xl font-bold tracking-tight text-white uppercase">RSUD Kalabahi</h4>
+                </div>
+                <p class="text-slate-400 leading-relaxed text-xs">
+                    Sistem pelayanan terintegrasi resmi untuk kemudahan akses informasi medis masyarakat Kabupaten Alor, Nusa Tenggara Timur.
+                </p>
+            </div>
+
+            <!-- Nav Links -->
+            <div class="space-y-6">
+                <h5 class="text-white font-bold uppercase tracking-widest text-xs border-b border-slate-900 pb-2">Menu Utama</h5>
+                <ul class="space-y-3 font-semibold text-xs">
+                    <li><button onclick="navigateTo('beranda')" class="hover:text-white text-slate-400 transition flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 mr-2"></i> Beranda Utama</button></li>
+                    <li><button onclick="navigateTo('profil')" class="hover:text-white text-slate-400 transition flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 mr-2"></i> Profil & Sejarah</button></li>
+                    <li><button onclick="navigateTo('rawatjalan')" class="hover:text-white text-slate-400 transition flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 mr-2"></i> Pelayanan Rawat Jalan</button></li>
+                    <li><button onclick="navigateTo('rawatinap')" class="hover:text-white text-slate-400 transition flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 mr-2"></i> Pelayanan Rawat Inap</button></li>
+                    <li><button onclick="navigateTo('igd')" class="hover:text-white text-slate-400 transition flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 mr-2"></i> Pelayanan IGD</button></li>
+                </ul>
+            </div>
+
+            <!-- Fasilitas & Informasi links -->
+            <div class="space-y-6">
+                <h5 class="text-white font-bold uppercase tracking-widest text-xs border-b border-slate-900 pb-2">Fasilitas & Informasi</h5>
+                <ul class="space-y-3 font-semibold text-xs">
+                    <li><button onclick="navigateTo('fasilitas')" class="hover:text-white text-slate-400 transition flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 mr-2"></i> Fasilitas RSUD</button></li>
+                    <li><button onclick="navigateToSub('denah', 'denah-rsud-kalabahi-section')" class="hover:text-white text-slate-400 transition flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 mr-2"></i> Denah RSUD Kalabahi</button></li>
+                    <li><a href="https://forms.gle/BRqQmRtRebZbVfq57" target="_blank" class="hover:text-white text-slate-400 transition flex items-center"><i data-lucide="chevron-right" class="w-4 h-4 mr-2"></i> Kotak Saran Humas</a></li>
+                </ul>
+            </div>
+
+            <!-- Contacts Info -->
+            <div class="space-y-6">
+                <h5 class="text-white font-bold uppercase tracking-widest text-xs border-b border-slate-900 pb-2">Kontak RSUD</h5>
+                <ul class="space-y-4 text-xs font-medium">
+                  <li class="flex items-start">
+                    <i data-lucide="map-pin" class="w-5 h-5 mr-3 text-brand-500 shrink-0"></i>
+                    <a href="https://maps.app.goo.gl/jS4Pwx1Ktsa7ZFiR6?g_st=ic" target="_blank" class="hover:text-white transition leading-relaxed">
+                      Jl. Dr. Sutomo No.8, Kalabahi Kota, Kec. Tlk. Mutiara, Kabupaten Alor, Nusa Tenggara Timur
+                    </a>
+                  </li>
+                  <li class="flex items-center">
+                    <i data-lucide="phone" class="w-5 h-5 mr-3 text-brand-500 shrink-0"></i>
+                    <span>Telp.Fax : (0386) 21008</span>
+                  </li>
+                  <li class="flex items-center">
+                    <i data-lucide="mail" class="w-5 h-5 mr-3 text-brand-500 shrink-0"></i>
+                    <span>Email : <a href="mailto:rsudkalabahi@ymail.com" class="hover:text-brand-400 transition">rsudkalabahi@ymail.com</a></span>
+                  </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="pt-8 border-t border-slate-900 text-center text-[10px] text-slate-500 font-bold uppercase tracking-widest">
+            &copy; 2026 RSUD KALABAHI. ALL RIGHTS RESERVED. DEV. SI-PINTAR PORTAL.
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const roomDetails = [
+            { id: "rppd", name: "Ruang Perawatan Penyakit Dalam (RPPD)", icon: "activity", desc: "Perawatan khusus pasien penyakit organ dalam." },
+            { id: "rpa", name: "Ruang Perawatan Anak (RPA)", icon: "baby", desc: "Ruang ramah anak untuk kenyamanan pemulihan si kecil." },
+            { id: "rppi", name: "Ruang Perawatan Penyakit Infeksi (RPPI)", icon: "shield-alert", desc: "Perawatan isolasi infeksi menular dengan protokol ketat." },
+            { id: "rpb", name: "Ruang Perawatan Bedah (RPB)", icon: "surgical-glove", desc: "Pemulihan intensif pasca-operasi bedah mayor & minor." },
+            { id: "rpu", name: "Ruang Perawatan Utama (RPU)", icon: "star", desc: "Ruangan kelas utama dengan kenyamanan ekstra." },
+            { id: "rpo", name: "Ruang Perawatan Obgyn (RPO)", icon: "heart", desc: "Perawatan pasca-persalinan dan kesehatan reproduksi." },
+            { id: "vk", name: "Kamar Bersalin/VK", icon: "activity", desc: "Ruang persalinan dengan peralatan medis canggih." },
+            { id: "perinatologi", name: "Ruang Perinatologi", icon: "thermometer", desc: "Perawatan khusus bayi baru lahir berisiko tinggi." },
+            { id: "icu", name: "Ruang Intensive Care Unit (ICU)", icon: "activity", desc: "Perawatan intensif bagi pasien dengan kondisi kritis yang memerlukan pengawasan ketat 24 jam." }
+        ];
+
+        // --- TOAST & NOTIFICATION SYSTEM ---
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `flex items-center gap-2 px-5 py-3.5 rounded-xl shadow-lg border text-xs font-bold transition-all transform translate-y-2 opacity-0 pointer-events-auto ${
+                type === 'success' ? 'bg-emerald-50 border-emerald-100 text-emerald-800' : 'bg-rose-50 border-rose-100 text-rose-800'
+            }`;
+            
+            const icon = type === 'success' ? 'check-circle' : 'alert-circle';
+            toast.innerHTML = `<i data-lucide="${icon}" class="w-4 h-4"></i> <span>${message}</span>`;
+            container.appendChild(toast);
+            lucide.createIcons();
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // --- PERSISTENT DROPDOWN ENGINE ---
+        function toggleDropdown(event, id) {
+            event.stopPropagation();
+            
+            const targetMenu = document.getElementById(id);
+            const allDropdownMenus = document.querySelectorAll('.dropdown-menu');
+            const allChevronIcons = document.querySelectorAll('.chevron-icon');
+            const currentTrigger = event.currentTarget;
+            const currentChevron = currentTrigger.querySelector('.chevron-icon');
+            
+            const isCurrentlyHidden = targetMenu.classList.contains('hidden');
+            
+            allDropdownMenus.forEach(menu => menu.classList.add('hidden'));
+            allChevronIcons.forEach(icon => icon.classList.remove('rotate-180'));
+            
+            if (isCurrentlyHidden) {
+                targetMenu.classList.remove('hidden');
+                if (currentChevron) currentChevron.classList.add('rotate-180');
+            }
+        }
+
+        function closeAllDropdowns() {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.add('hidden'));
+            document.querySelectorAll('.chevron-icon').forEach(icon => icon.classList.remove('rotate-180'));
+        }
+
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.dropdown-container')) {
+                closeAllDropdowns();
+            }
+        });
+
+        // --- APP NAVIGATION ROUTING ---
+        function navigateTo(tabId) {
+            closeAllDropdowns();
+            
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.add('hidden');
+            });
+            
+            const activePanel = document.getElementById(`sec-${tabId}`);
+            if (activePanel) {
+                activePanel.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.className = btn.className.replace('text-brand-500 bg-brand-50 font-bold', 'text-slate-700 font-semibold');
+            });
+
+            showToast(`Membuka halaman ${tabId.toUpperCase()}`, 'success');
+        }
+
+        function navigateToSub(tabId, elementId) {
+            closeAllDropdowns();
+            navigateTo(tabId);
+            setTimeout(() => {
+                const targetEl = document.getElementById(elementId);
+                if (targetEl) {
+                    const navHeight = 75; // Tinggi sticky navbar
+                    const rect = targetEl.getBoundingClientRect();
+                    const targetTop = rect.top + window.scrollY - navHeight;
+                    
+                    window.scrollTo({
+                        top: Math.max(0, targetTop),
+                        behavior: 'smooth'
+                    });
+                    
+                    targetEl.classList.add('ring-4', 'ring-accent-400', 'transition-all', 'duration-500');
+                    setTimeout(() => {
+                        targetEl.classList.remove('ring-4', 'ring-accent-400');
+                    }, 2000);
+                }
+            }, 100);
+        }
+
+        // --- RENDER VIEWS ---
+        function renderRuangPerawatan() {
+            const container = document.getElementById('ruang-perawatan-grid');
+            if (!container) return;
+            container.innerHTML = '';
+
+            roomDetails.forEach(room => {
+                const card = document.createElement('div');
+                card.className = "bg-white border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition duration-200 flex flex-col justify-between";
+                card.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="bg-brand-50 p-3 rounded-xl w-12 h-12 flex items-center justify-center text-brand-600">
+                            <i data-lucide="${room.icon}" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="text-sm font-extrabold text-slate-800 leading-snug">${room.name}</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">${room.desc}</p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        // Mobile Nav Hamburger toggle
+        const mobToggle = document.getElementById('mobile-toggle');
+        const mobNav = document.getElementById('mobile-nav');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobToggle.addEventListener('click', () => {
+            const isOpen = !mobNav.classList.contains('hidden');
+            if (isOpen) {
+                toggleMobileMenu();
+            } else {
+                mobNav.classList.remove('hidden');
+                menuIcon.setAttribute('data-lucide', 'x');
+            }
+            lucide.createIcons();
+        });
+
+        function toggleMobileSubmenu(id) {
+            const targetSub = document.getElementById(id);
+            const allMobileSubs = document.querySelectorAll('[id^="mob-sub-"]');
+            const currentChevron = document.getElementById('mob-chevron-' + id.split('-')[2]);
+            const allMobileChevrons = document.querySelectorAll('[id^="mob-chevron-"]');
+            
+            const isHidden = targetSub.classList.contains('hidden');
+            
+            allMobileSubs.forEach(sub => {
+                if (sub.id !== id) sub.classList.add('hidden');
+            });
+            allMobileChevrons.forEach(chev => {
+                if (chev.id !== 'mob-chevron-' + id.split('-')[2]) chev.classList.remove('rotate-180');
+            });
+
+            if (isHidden) {
+                targetSub.classList.remove('hidden');
+                if (currentChevron) currentChevron.classList.add('rotate-180');
+            } else {
+                targetSub.classList.add('hidden');
+                if (currentChevron) currentChevron.classList.remove('rotate-180');
+            }
+        }
+
+        function toggleMobileMenu() {
+            mobNav.classList.add('hidden');
+            menuIcon.setAttribute('data-lucide', 'menu');
+            document.querySelectorAll('[id^="mob-sub-"]').forEach(sub => sub.classList.add('hidden'));
+            document.querySelectorAll('[id^="mob-chevron-"]').forEach(chev => chev.classList.remove('rotate-180'));
+            lucide.createIcons();
+        }
+
+        // --- LIGHTBOX DYNAMIC FUNCTIONS ---
+        function openLightbox(imgSrc, altText) {
+            const lightbox = document.getElementById('image-lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imgSrc;
+            lightboxImg.alt = altText || "Tampilan Penuh Gambar";
+            lightbox.classList.remove('hidden');
+            setTimeout(() => {
+                lightbox.classList.remove('opacity-0');
+                lightboxImg.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('image-lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightbox.classList.add('opacity-0');
+            lightboxImg.classList.add('scale-95');
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+            }, 300);
+        }
+
+        // --- INITIALIZE APP ON LOAD ---
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            renderRuangPerawatan();
+        });
+    </script>
+</body>
+</html>

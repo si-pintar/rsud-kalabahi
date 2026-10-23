@@ -1986,6 +1986,9 @@
             if (activePanel) {
                 activePanel.classList.remove('hidden');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // Memperbarui URL hash di browser tanpa reload halaman
+                history.pushState(null, null, `#${tabId}`);
             }
 
             document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -2111,11 +2114,26 @@
             }, 300);
         }
 
-        // --- INITIALIZE APP ON LOAD ---
+        // --- INITIALIZE APP ON LOAD & HASH ROUTING ---
         window.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
             renderRuangPerawatan();
+
+            // Cek apakah ada hash di URL saat halaman pertama kali dibuka
+            const hash = window.location.hash.replace('#', '');
+            if (hash) {
+                if (hash === 'sec-infomutu' || hash === 'infomutu') {
+                    navigateTo('infomutu');
+                } else if (hash === 'sec-artikelextra-mutu-tw3' || hash === 'artikelextra-mutu-tw3') {
+                    navigateTo('artikelextra-mutu-tw3');
+                } else if (hash.startsWith('sec-')) {
+                    const cleanTab = hash.replace('sec-', '');
+                    if (document.getElementById(hash)) {
+                        navigateTo(cleanTab);
+                    }
+                }
+            }
         });
-    </script>
+</script>
 </body>
 </html>
